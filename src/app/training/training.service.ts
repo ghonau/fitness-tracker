@@ -24,9 +24,9 @@ export class TrainingService{
                  duration: doc.duration,
                  calories: doc.calories
              }}); 
-       })).subscribe((exercies: Exercise[])=>{
-           this.availableExercises = exercies;
-           this.exercisesChanged.next({...this.availableExercises});
+       })).subscribe((exercises: Exercise[])=>{
+           this.availableExercises = exercises;           
+           this.exercisesChanged.next([...this.availableExercises]);
        })
     }
 
