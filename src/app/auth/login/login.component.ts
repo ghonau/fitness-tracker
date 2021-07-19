@@ -1,6 +1,9 @@
 import { formatCurrency } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
+import { Subscription } from 'rxjs';
+import { UIService } from 'src/app/shared/ui.service';
+
 
 
 
@@ -11,11 +14,23 @@ import { AuthService } from '../auth.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
+  
+  uiServiceSubscription : Subscription; 
+  showSpinner: boolean = false; 
   loginForm: FormGroup ; 
-  constructor(private authService: AuthService) { }
+  
+  constructor(private authService: AuthService, private uiService: UIService) { 
+
+  }
+  ngOnDestroy(): void {
+    this.uiServiceSubscription.unsubscribe() ;
+  }
 
   ngOnInit(): void {
+    this.uiServiceSubscription =  this.uiService.loadingStateChanged.subscribe((show: boolean) => {
+      this.showSpinner =  show; 
+    })
     this.loginForm = new FormGroup({
       email : new FormControl('', {
         validators: [Validators.email, Validators.required]
@@ -27,7 +42,7 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit(){
-    this.authService.registerUser({
+    this.authService.login({
       email: this.loginForm.value.email,
       password: this.loginForm.value.password
     })

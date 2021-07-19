@@ -27,22 +27,6 @@ export class NewTrainingComponent implements OnInit, OnDestroy {
     
     
     this.availableExercisesSubscription =  this.trainingService.exercisesChanged.subscribe((e : Exercise[]) => {
-    //   this.availableExercises = [{
-    //     id : "FSxAhF7YkCVk0NLZZLSi", 
-    //     calories : 180,
-    //     duration: 20,
-    //     name: "Jugging"
-    //   }, 
-    //   {
-    //     id : "fbDSRDNVED4oaecCo9g7", 
-    //     calories : 120,
-    //     duration: 15,
-    //     name: "Burpees"
-    //   }, 
-    // ]
-  
-    // }); 
-
     this.availableExercises = e;
     
   }); 

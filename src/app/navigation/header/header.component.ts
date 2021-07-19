@@ -29,4 +29,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     console.log("trying to emit sidenavToggled event emitter"); 
     this.sidenavToggled.emit(); 
   }
+  logout(){
+    this.authService.logout(); 
+  }
 }
