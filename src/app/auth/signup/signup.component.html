@@ -16,7 +16,7 @@
             <input 
             matInput 
             ngModel
-            name="birthdate"
+            name="birthdate"    
             [matDatepicker] = "picker" 
             ngModel name="date" 
             placeholder="Choose your birthdate"
@@ -27,6 +27,7 @@
         
         <mat-checkbox ngModel name="agree" required color='primary'>Agree to terms and conditions.</mat-checkbox>
         
-        <button type="Submit" [disabled]="form.invalid" mat-raised-button color='primary'>Submit</button>
+        <button *ngIf="!showSpinner" type="Submit" [disabled]="form.invalid" mat-raised-button color='primary'>Submit</button>
+        <mat-spinner *ngIf="showSpinner"></mat-spinner>
     </form>
 </section>

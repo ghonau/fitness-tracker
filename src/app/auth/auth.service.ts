@@ -6,7 +6,6 @@ import { Subject } from 'rxjs';
 import { AuthData } from "./auth-data.model";
 import { User } from "./user.model";
 import { TrainingService } from '../training/training.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { UIService } from '../shared/ui.service';
 
 @Injectable() 
@@ -18,8 +17,7 @@ export class AuthService{
     constructor(
         private router: Router,
         private afAuth: AngularFireAuth, 
-        private trainingService: TrainingService,
-        private matSnackBar : MatSnackBar,
+        private trainingService: TrainingService,        
         private uiService: UIService
         ){}
     
@@ -45,9 +43,7 @@ export class AuthService{
         })
         .catch(error => {
             this.uiService.loadingStateChanged.next(false); 
-            this.matSnackBar.open(error.message,'', {
-                duration:3000
-            })
+            this.uiService.showSnackbar(error.message , '' , 3000);             
             this.loggedIn = false; 
         });                
     }
@@ -58,10 +54,8 @@ export class AuthService{
         console.log(result);                 
         this.uiService.loadingStateChanged.next(false); 
     })
-    .catch(error => {
-        this.matSnackBar.open(error.message, '', {
-            duration: 3000
-        })
+    .catch(error => {        
+        this.uiService.showSnackbar(error.message, '' , 3000);         
         this.uiService.loadingStateChanged.next(false); 
     }); 
       

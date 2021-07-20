@@ -6,8 +6,6 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { SignupComponent } from './auth/signup/signup.component';
-import { LoginComponent } from './auth/login/login.component';
 import { TrainingComponent } from './training/training.component';
 import { CurrentTrainingComponent } from './training/current-training/current-training.component';
 import { NewTrainingComponent } from './training/new-training/new-training.component';
@@ -25,13 +23,12 @@ import {AngularFireAnalyticsModule } from '@angular/fire/analytics';
 import {AngularFireAuthModule} from '@angular/fire/auth'; 
 import { environment } from '../environments/environment';
 import { UIService } from './shared/ui.service';
+import { AuthModule } from './auth/auth.module';
 
 
 @NgModule({
   declarations: [
-    AppComponent,
-    SignupComponent,
-    LoginComponent,
+    AppComponent,    
     TrainingComponent,
     CurrentTrainingComponent,
     NewTrainingComponent,
@@ -53,7 +50,8 @@ import { UIService } from './shared/ui.service';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     AngularFireAnalyticsModule,
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    AuthModule
   ],
   providers: [AuthService, TrainingService, UIService],
   bootstrap: [AppComponent],

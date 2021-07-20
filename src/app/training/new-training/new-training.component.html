@@ -5,7 +5,7 @@
             Time to start a workout!
         </mat-card-title>
         <mat-card-content fxLayoutAlign="center">
-            <mat-form-field appearance="fill">
+            <mat-form-field *ngIf="!showSpinner && availableExercises" appearance="fill">
                 <mat-label>Favorite exercise</mat-label>
                     <mat-select ngModel name="exercise" required>
                         <mat-option *ngFor="let exer of availableExercises" [value]="exer.id">                        
@@ -13,9 +13,11 @@
                         </mat-option>                        
                     </mat-select>
             </mat-form-field>
+            <mat-spinner *ngIf="showSpinner"></mat-spinner>
         </mat-card-content>
-        <mat-card-actions fxLayoutAlign="center">
-            <button type="Submit" mat-button [disabled] = "form.invalid">Start</button>
+        <mat-card-actions fxLayoutAlign="center" *ngIf="!showSpinner">
+            <button *ngIf="availableExercises" type="Submit" mat-button [disabled] = "form.invalid">Start</button>
+            <button *ngIf="!availableExercises" type="button" mat-button (click)="fetchExercises()" >Fetch again</button>
         </mat-card-actions>        
     </mat-card>
  </form>

@@ -28,8 +28,8 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.uiServiceSubscription =  this.uiService.loadingStateChanged.subscribe((show: boolean) => {
-      this.showSpinner =  show; 
+    this.uiServiceSubscription =  this.uiService.loadingStateChanged.subscribe((isLoading: boolean) => {
+      this.showSpinner =  isLoading; 
     })
     this.loginForm = new FormGroup({
       email : new FormControl('', {
